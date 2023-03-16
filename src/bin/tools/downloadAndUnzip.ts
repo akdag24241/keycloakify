@@ -71,14 +71,16 @@ async function getNpmProxyConfig(): Promise<Pick<FetchOptions, "proxy" | "noProx
  * @returns promise for the full path of the downloaded file
  */
 async function download(url: string, dir: string, filename: string): Promise<string> {
-    const proxyOpts = await getNpmProxyConfig();
-    const cacheRoot = process.env.XDG_CACHE_HOME ?? homedir();
-    const cachePath = join(cacheRoot, ".keycloakify/cache");
-    const opts: FetchOptions = { cachePath, ...proxyOpts };
-    const response = await fetch(url, opts);
+    console.log("getNpmProxyConfig", getNpmProxyConfig)
+    console.log("url", url)
+    console.log("homedir", homedir)
+    console.log("fetch", fetch)
+    console.log("writeFile", writeFile)
+    console.log("join", join)
+
     const filepath = pathJoin(dir, filename);
-    await mkdir(dir, { recursive: true });
-    await writeFile(filepath, response.body);
+        
+    console.log("normal returned filepath is", filepath)
     return filepath;
 }
 
